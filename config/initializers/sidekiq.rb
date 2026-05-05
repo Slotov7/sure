@@ -53,7 +53,11 @@ redis_config = if ENV["REDIS_SENTINEL_HOSTS"].present?
   end
 else
   # Standard Redis URL configuration (no Sentinel)
-  { url: ENV.fetch("REDIS_URL", "redis://localhost:6379/0") }
+  options = { url: ENV.fetch("REDIS_URL", "redis://localhost:6379/0") }
+  if options[:url].start_with?("rediss://")
+    options[:ssl_params] = { verify_mode: OpenSSL::SSL::VERIFY_NONE }
+  end
+  options
 end
 
 Sidekiq.configure_server do |config|
