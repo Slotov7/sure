@@ -8,5 +8,13 @@ Rails.application.config.after_initialize do
   puts "User: #{config[:user] || config[:username]}"
   puts "SSL Mode: #{config[:sslmode]}"
   puts "Using DATABASE_URL? #{ENV['DATABASE_URL'].present?}"
+  
+  begin
+    ActiveRecord::Base.connection.execute("SELECT 1")
+    puts "Connection Status: SUCCESS!"
+  rescue => e
+    puts "Connection Status: FAILED!"
+    puts "Error Message: #{e.message}"
+  end
   puts "================================================"
 end

@@ -27,5 +27,5 @@ production:
   database: <%= ENV["DB_NAME"] %>
   user: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
-  sslmode: require
+  sslmode: verify-none
   prepared_statements: false
