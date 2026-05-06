@@ -28,3 +28,4 @@ production:
   user: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
   sslmode: require
+  prepared_statements: false
