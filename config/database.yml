@@ -19,7 +19,9 @@ test:
   password: <%= ENV.fetch("POSTGRES_PASSWORD") { nil } %>
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 3 } %>
   host: <%= ENV["DB_HOST"] %>
   port: <%= ENV["DB_PORT"] %>
   database: <%= ENV["DB_NAME"] %>
